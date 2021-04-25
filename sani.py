@@ -453,7 +453,7 @@ def grab_menu():
 		numberfromfriend()
 	elif grm =="4":
 		idfrompost()
-	elif grm ==5":
+	elif grm =="5":
 		idfrompost_reacts()
 	elif grm =="0":
 		menu()
