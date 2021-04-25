@@ -514,7 +514,7 @@ def idfrompost_reacts():
 		time.sleep(1)
 		('python2 jam.py')
 	try:
-		os.mkdir('/sdcard/jam.txt')
+		os.mkdir('/sdcard/ids')
 	except OSError:
 		pass
 	try:
@@ -534,7 +534,7 @@ def idfrompost_reacts():
 		z=json.loads(r.text)
 		jam('[✓] Getting Post Likes Extract IDs...')
 		print"--------------------------------------"
-		bz = open('/sdcard/jam.txt','w')
+		bz = open('/sdcard/ids/jamgroup.txt','w')
 		for a in z['data']:
 			idh.append(a['id'])
 			bz.write(a['id'] + '\n')
@@ -573,14 +573,14 @@ def idfrompost():
 		time.sleep(1)
 		('python2 jam.py')
 	try:
-		os.mkdir('/sdcard/jam.txt')
+		os.mkdir('/sdcard/ids')
 	except OSError:
 		pass
 	try:
 		os.system('clear')
 		print banner
 		una = ('100052292505058')
-		tez = raw_input("[+] Post ID : ")
+		una = raw_input("[+] Post ID : ")
 		try:
 			jok = requests.get("https://graph.facebook.com/me/friends?method=post&uids="+una+"&access_token="+toket)
 			op = json.loads(jok.text)
@@ -588,11 +588,11 @@ def idfrompost():
 			print"[!] Friend Not Found"
 			raw_input("Press Enter To Back ")
 			grab()
-		r=requests.get("https://graph.facebook.com/"+tez+"/likes?limit=9999999&access_token="+toket)
+		r=requests.get("https://graph.facebook.com/"+una+"/reactions?limit=9999999&access_token="+toket)
 		z=json.loads(r.text)
 		jam('[✓] Getting Post Likes Extract IDs...')
 		print"--------------------------------------"
-		bz = open('/sdcard/jam.txt','w')
+		bz = open('/sdcard/ids/jamtimline.txt','w')
 		for a in z['data']:
 			idh.append(a['id'])
 			bz.write(a['id'] + '\n')
@@ -606,6 +606,7 @@ def idfrompost():
 		grab()
 	except IOError:
 		print"[!] Error While Creating file"
+		
 		raw_input("\nPress Enter To Back ")
 		grab()
 	except (KeyboardInterrupt,EOFError):
