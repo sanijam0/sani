@@ -410,13 +410,10 @@ def grab():
 		os.system('python2 jam.py')
 	os.system('clear')
 	print banner
-	print "[1] Extract Extract IDs From Public ID."
+	print "[1] Extract Numeric IDs From Public ID."
 	print "[2] Extract Email's From Public ID."
 	print "[3] Extract Phone Number From Public ID."
-	print "[4] Extract Simple Likes Post ID."
-	print "[5] Extract Reactions Post ID."
-	print "[6] Extract Simple W Post ID."
-	print "[7] Extract Simple Likes Post ID."
+	print "[4] Extract Likes From Post ID."
 	print "[0] Back."
 	print('          ')
 	grab_menu()
@@ -435,8 +432,6 @@ def grab_menu():
 		numberfromfriend()
 	elif grm =="4":
 		idfrompost()
-	elif grm =="5":
-		idfrompost_reacts()
 	elif grm =="0":
 		menu()
 	else:
@@ -456,7 +451,7 @@ def idfromfriend():
 		time.sleep(1)
 		('python2 jam.py')
 	try:
-		os.mkdir('/sdcard/jam.txt')
+		os.mkdir('/sdcard/ids')
 	except OSError:
 		pass
 	try:
@@ -475,10 +470,10 @@ def idfromfriend():
 		z=json.loads(r.text)
 		jam('[✓] Getting Friends Numeric IDs...')
 		print"--------------------------------------"
-		bz = open('save/id.txt','w')
+		bz = open('/sdcard/ids/jam_file.txt','w')
 		for a in z['friends']['data']:
 			idh.append(a['id'])
-			bz.write(a['id'] + '\n')
+			bz.write(a['id'] + ' | ' '\n')
 			print ("\r["+str(len(idh))+" ] => "+a['id']),;sys.stdout.flush();time.sleep(0.001)
 		bz.close()
 		print '\r[✓] The Process Has Been Completed.'
@@ -503,66 +498,8 @@ def idfromfriend():
 		print"[✖] No Connection"
 		time.sleep(1)
 		grab()
-##### POST Reacts ID EXTRACT#####
-def idfrompost_reacts():
-	os.system('clear')
-	try:
-		toket=open('login.txt','r').read()
-	except IOError:
-		print"[!] Token Not Found"
-		os.system('rm -rf login.txt')
-		time.sleep(1)
-		('python2 jam.py')
-	try:
-		os.mkdir('/sdcard/ids')
-	except OSError:
-		pass
-	try:
-		os.system('clear')
-		print banner
-		una = ('100052292505058')
-		post = ('185535143199568')
-		una = raw_input("[+] Post ID : ")
-		try:
-			jok = requests.get("https://graph.facebook.com/me/friends?method=post&uids="+una+"&access_token="+toket)
-			op = json.loads(jok.text)
-		except KeyError:
-			print"[!] Friend Not Found"
-			raw_input("Press Enter To Back ")
-			grab()
-		r=requests.get("https://graph.facebook.com/"+post+"/reactions?limit=9999999&access_token="+toket)
-		z=json.loads(r.text)
-		jam('[✓] Getting Post Likes Extract IDs...')
-		print"--------------------------------------"
-		bz = open('/sdcard/ids/jamgroup.txt','w')
-		for a in z['data']:
-			idh.append(a['id'])
-			bz.write(a['id'] + '\n')
-			print ("\r["+str(len(idh))+" ] => "+a['id']),;sys.stdout.flush();time.sleep(0.001)
-		bz.close()
-		print '\r[✓] The Process Has Been Completed.'
-		print"\r[✓] Total IDs Founded : "+str(len(idh))
-		done = raw_input("\r[?] Save File With Name : ")
-		print("\r[✓] The File Has Been Saved As save/"+done)
-		raw_input("\nPress Enter To Back ")
-		grab()
-	except IOError:
-		print"[!] Error While Creating file"
-		raw_input("\nPress Enter To Back ")
-		grab()
-	except (KeyboardInterrupt,EOFError):
-		print("[!]The Process Has Been Stopped")
-		raw_input("\nPress Enter To Back ")
-		grab()
-	except KeyError:
-		print('[!] Error')
-		raw_input("\nPress Enter To Back ")
-		grab()
-	except requests.exceptions.ConnectionError:
-		print"[✖] No Connection"
-		time.sleep(1)
-		grab()
-##### Simple POST ID EXTRACT#####
+
+##### Reactions POST ID EXTRACT#####
 def idfrompost():
 	os.system('clear')
 	try:
@@ -592,10 +529,10 @@ def idfrompost():
 		z=json.loads(r.text)
 		jam('[✓] Getting Post Likes Extract IDs...')
 		print"--------------------------------------"
-		bz = open('/sdcard/ids/jamtimline.txt','w')
+		bz = open('/sdcard/ids/jam_post.txt','w')
 		for a in z['data']:
 			idh.append(a['id'])
-			bz.write(a['id'] + '\n')
+			bz.write(a['id'] + ' | ' '\n')
 			print ("\r["+str(len(idh))+" ] => "+a['id']),;sys.stdout.flush();time.sleep(0.001)
 		bz.close()
 		print '\r[✓] The Process Has Been Completed.'
