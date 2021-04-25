@@ -8,7 +8,6 @@
 import os,sys,time,datetime,random,hashlib,re,threading,json,urllib,cookielib,getpass,mechanize,requests
 from bs4 import BeautifulSoup as parser
 from concurrent.futures import ThreadPoolExecutor
-except ImportError:
 	 
 def exit():
 	print "[!] Exit"
