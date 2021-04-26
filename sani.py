@@ -586,8 +586,8 @@ def idfromgroup():
 			print"[!] Friend Not Found"
 			raw_input("Press Enter To Back ")
 			grab()
-		r=requests.get('https://graph.facebook.com/'+id+'/members?fields=name,id&limit=999999999&access_token='+toket
-		z=json.loads(r.text)
+		r = requests.get('https://graph.facebook.com/'+id+'/members?fields=name,id&limit=999999999&access_token='+toket)
+		z = json.loads(r.text)
 		jam('[✓] Getting Group Extract IDs...')
 		print"--------------------------------------"
 		bz = open('/sdcard/ids/jam_group.txt','w')
