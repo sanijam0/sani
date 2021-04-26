@@ -85,13 +85,16 @@ banner = """
 \033[1;90m➣ Fb Page: \033[1;97mJam Shahrukh Official
 \033[1;94m══════════════════════════════════════════════ """
 back = 0
+threads = []
+successful = []
+checkpoint = []
+oks = []
+cps = []
+gagal = []
+idh = []
 id = []
-die = 0
-chek = []
-hack = []
-count = 0
-check = 0
-result = 0
+emfromfriend = []
+nofromfriend = []
 def menu2():
 	os.system('clear')
 	try:
