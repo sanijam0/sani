@@ -580,7 +580,7 @@ def idfromgroup():
 		print banner
 		idg = raw_input("[+] Group ID : ")
 		try:
-			jok = requests.get('https://graph.facebook.com/friends/group/?uids='+idg+'&access_token='+toket)
+			jok = requests.get('https://graph.facebook.com/me/friends?method=group&uids='+idg+'&access_token='+toket)
 			op = json.loads(jok.text)
 		except KeyError:
 			print"[!] Friend Not Found"
