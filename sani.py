@@ -414,7 +414,6 @@ def grab():
 	print "[2] Extract Email's From Public ID."
 	print "[3] Extract Phone Number From Public ID."
 	print "[4] Extract Likes From Post ID."
-	print "[5] Extract Likes From Group ID."
 	print "[0] Back."
 	print('          ')
 	grab_menu()
@@ -561,64 +560,7 @@ def idfrompost():
 		print"[✖] No Connection"
 		time.sleep(1)
 		grab()
-##### Reactions Group ID EXTRACT#####
-def idfromgroup():
-	os.system('clear')
-	try:
-		toket=open('login.txt','r').read()
-	except IOError:
-		print"[!] Token Not Found"
-		os.system('rm -rf login.txt')
-		time.sleep(1)
-		('python2 jam.py')
-	try:
-		os.mkdir('/sdcard/ids')
-	except OSError:
-		pass
-	try:
-		os.system('clear')
-		print banner
-		tez = raw_input("[+] Group ID : ")
-		try:
-			jok = requests.get('https://graph.facebook.com/group/?uids='+tez+'&access_token='+toket)
-			op = json.loads(jok.text)
-		except KeyError:
-			print"[!] Friend Not Found"
-			raw_input("Press Enter To Back ")
-			grab()
-		r = requests.get('https://graph.facebook.com/'+tez+'/members?fields=name,uids&limit=999999999&access_token='+toket)
-		z = json.loads(r.text)
-		jam('[✓] Getting Group Extract IDs...')
-		print"--------------------------------------"
-		bz = open('/sdcard/ids/jam_group.txt','w')
-		for a in z['data']:
-			idh.append(a['id'])
-			bz.write(a['id'] + ' | ' '\n')
-			print ("\r["+str(len(idh))+" ] => "+a['id']),;sys.stdout.flush();time.sleep(0.001)
-		bz.close()
-		print '\r[✓] The Process Has Been Completed.'
-		print"\r[✓] Total IDs Founded : "+str(len(idh))
-		done = raw_input("\r[?] Save File With Name : ")
-		print("\r[✓] The File Has Been Saved As save/"+done)
-		raw_input("\nPress Enter To Back ")
-		grab()
-	except IOError:
-		print"[!] Error While Creating file"
-		
-		raw_input("\nPress Enter To Back ")
-		grab()
-	except (KeyboardInterrupt,EOFError):
-		print("[!]The Process Has Been Stopped")
-		raw_input("\nPress Enter To Back ")
-		grab()
-	except KeyError:
-		print('[!] Error')
-		raw_input("\nPress Enter To Back ")
-		grab()
-	except requests.exceptions.ConnectionError:
-		print"[✖] No Connection"
-		time.sleep(1)
-		grab()
+
 ##### EMAIL FROM Friend#####
 def emailfromfriend():
 	os.system('clear')
