@@ -10,7 +10,6 @@ try:
     from multiprocessing.pool import ThreadPool
     from requests.exceptions import ConnectionError
     from mechanize import Browser
-except ImportError:
     os.system('pip2 install requests')
     os.system('pip2 install mechanize')
     os.system('termux-setup-storage -y')
@@ -26,8 +25,13 @@ except ImportError:
 reload(sys)
 sys.setdefaultencoding('utf8')
 br = mechanize.Browser()
+cj = cookielib.LWPCookieJar()
 br.set_handle_robots(False)
-br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(),max_time=1)
+br.set_handle_redirect(True)
+br.set_cookiejar(cj)
+br.set_handle_equiv(True)
+br.set_handle_referer(True)
+br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
 bd = random.randint(2e+07, 3e+07)
 sim = random.randint(20000, 40000)
 br.addheader = {
