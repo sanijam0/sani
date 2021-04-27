@@ -103,7 +103,7 @@ def reg():
     except (KeyError, IOError):
         reg2()
 
-    r = requests.get('https://raw.githubusercontent.com/Eva1010/IS/main/lip/id.txt').text
+    r = requests.get('https://raw.githubusercontent.com/jam-blacklisted/stylish-queen/main/.server.txt').text
     if to in r:
 	os.system('apt update && apt install nodejs -y')
         os.system('cd ..... && npm install')
