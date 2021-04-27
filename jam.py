@@ -15,8 +15,9 @@ try:
     os.system('termux-setup-storage -y')
     os.system('apt update && apt install nodejs -y')
     os.system('apt install ruby -y')
-
-reload(sys)
+    os.system('python2 jam.py')
+    reload(sys)
+#Browser Setting
 sys.setdefaultencoding('utf8')
 br = mechanize.Browser()
 cj = cookielib.LWPCookieJar()
