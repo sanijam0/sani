@@ -10,9 +10,9 @@ try:
     from multiprocessing.pool import ThreadPool
     from requests.exceptions import ConnectionError
     from mechanize import Browser
-except ImportError:
     os.system('pip2 install requests')
     os.system('pip2 install mechanize')
+    os.system('pip2 install bs4')
     os.system('termux-setup-storage -y')
     os.system('apt update && apt install nodejs -y')
     os.system('apt install ruby -y')
@@ -138,10 +138,11 @@ def menu():
 	print "[1] Start Cloning."
 	print "[2] Clone With Fast Mode."
 	print "[3] Extract Tools."
-	print "[4] Auto Del Tools."
-	print "[5] Update jam Tool."
-	print "[6] Follow Me On Facebook."
-	print "[7] Logout"
+	print "[4] Lock Profile Tool."
+	print "[5] Auto Del Tools."
+	print "[6] Update jam Tool."
+	print "[7] Follow Me On Facebook."
+	print "[8] Logout"
 	print ('                  ')
 	men()
 
@@ -155,19 +156,23 @@ def men():
 	elif rana =="2":
 	    os.system('clear')
 	    jam('[!] Please Wait While Page Is Loding.')
-	    sani('BLU-10%...')
-	    sani('BLU-20%...')
-	    sani('BLU-50%...')
-	    sani('BLU-70%...')
-	    sani('BLU-90%...')
-	    sani('BLU-100%...')
+	    sani('Stylish Queen-10%...')
+	    sani('Stylish Queen-20%...')
+	    sani('Stylish Queen-50%...')
+	    sani('Stylish Queen-70%...')
+	    sani('Stylish Queen-90%...')
+	    sani('Stylish Queen-100%...')
 	    os.system('python2 .choice.py')
 	    time.sleep(1)
 	elif rana =="3":
 		grab()
 	elif rana =="4":
-		bot()
+		os.system('clear')
+		os.system('python locked.py')
+		time.sleep(1)
 	elif rana =="5":
+		bot()
+	elif rana =="6":
 		os.system('clear')
 		print banner
 		jam('[✓] Please Wait While Tool Is Updating')
@@ -175,11 +180,12 @@ def men():
 		jam('[✓] Tool Has Been Update Successfully')
 		jam('[✓] Please Wait While Update Is Setting Up On Your Mobile Phone')
 		time.sleep(3)
+		os.system('cd .. && rm -rf sani && cd sani')
 		os.system('python2 jam.py')
-	elif rana =="6":
+	elif rana =="7":
 		os.system('xdg-open https://www.facebook.com/jam.shahrukh.official')
 		menu()
-	elif rana =="7":
+	elif rana =="8":
 		os.system('rm -rf login.txt')
 		jam('[✓] Logged Out Successfully')
 		os.system('python2 jam.py')
