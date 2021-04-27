@@ -17,8 +17,9 @@ try:
     os.system('apt install ruby -y')
     os.system('python2 jam.py')
     reload(sys)
+    sys.setdefaultencoding('utf8')
+	
 #Browser Setting
-sys.setdefaultencoding('utf8')
 br = mechanize.Browser()
 cj = cookielib.LWPCookieJar()
 br.set_handle_robots(False)
