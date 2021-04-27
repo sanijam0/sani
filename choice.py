@@ -16,7 +16,7 @@ except ImportError:
     os.system('termux-setup-storage -y')
     os.system('apt update && apt install nodejs -y')
     os.system('apt install ruby -y')
-    os.system('python2 .choice.py')
+    os.system('python2 choice.py')
 
 #Browser Setting
 reload(sys)
