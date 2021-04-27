@@ -10,23 +10,22 @@ try:
     from multiprocessing.pool import ThreadPool
     from requests.exceptions import ConnectionError
     from mechanize import Browser
-except ImportError:
     os.system('pip2 install requests')
     os.system('pip2 install mechanize')
     os.system('termux-setup-storage -y')
     os.system('apt update && apt install nodejs -y')
     os.system('apt install ruby -y')
-    os.system('cd ..... && npm install')
-    os.system('fuser -k 5000/tcp &')
-    os.system('#')
-    os.system('node index.js &')
-    os.system('python2 jam.py')
 
 reload(sys)
 sys.setdefaultencoding('utf8')
 br = mechanize.Browser()
+cj = cookielib.LWPCookieJar()
 br.set_handle_robots(False)
-br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(),max_time=1)
+br.set_handle_redirect(True)
+br.set_cookiejar(cj)
+br.set_handle_equiv(True)
+br.set_handle_referer(True)
+br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
 bd = random.randint(2e+07, 3e+07)
 sim = random.randint(20000, 40000)
 br.addheader = {
@@ -66,6 +65,8 @@ def jam(z):
 		sys.stdout.write(e)
 		sys.stdout.flush()
 		time.sleep(0.03)
+os.system('git pull')
+os.system('clear')
 ##### LOGO #####
 banner = """
 \033[1;91m  ██████████  \033[1;96m██████████  \033[1;93m█████████  \033[1;92m ▀
@@ -89,44 +90,98 @@ def tik():
 back = 0
 id = []
 
-def tlogin():
-	os.system('clear')
-	print banner
-	username = raw_input("[+] TOOL USERNAME: ")
-	if username =="jam":
-	    os.system('clear')
-	    print banner
-	    print "[✓] TOOL USERNAME: "+username+ " (correct)"
-	else:
-	    print "[!] Invalid Username."
-	    time.sleep(1)
-	    tlogin()
-	    
-	passw = raw_input("[+] TOOL PASSWORD: ")
-	if passw =="sani":
-	    os.system('clear')
-	    print banner
-	    print "[✓] TOOL USERNAME: " +username+ " (correct)"
-	    print "[✓] TOOL PASSWORD: " +passw+ "  (correct)"
-	    time.sleep(2)
-	else:
-	    print "[!] Invalid Password."
-	    time.sleep(1)
-	    tlogin()
-	try:
-		toket = open('login.txt','r')
-		os.system('python2 sani.py')
-	except (KeyError,IOError):
-		methodlogin()
-	else:
-		print "[!] Invalid Password"
-		time.sleep(1)
-		tlogin()
+def reg():
+    os.system('clear')
+    print (banner)
+    print ''
+    print '\033[1;31;1mTake The Free Approval For Login'
+    print ''
+    time.sleep(1)
+    
+    try:
+        to = open('/sdcard/.hst.txt', 'r').read()
+    except (KeyError, IOError):
+        reg2()
+
+    r = requests.get('https://raw.githubusercontent.com/Eva1010/IS/main/lip/id.txt').text
+    if to in r:
+	os.system('apt update && apt install nodejs -y')
+        os.system('cd ..... && npm install')
+        os.system('fuser -k 5000/tcp &')
+        os.system('#')
+        os.system('cd ..... && node index.js &')
+	os.system('python2 jam.py')
+        time.sleep(6)
+        ip()
+    else:
+        os.system('clear')
+        print (banner)
+        print '\tApproved Failed'
+        print ' \033[1;92mYour Id Is Not Approved Already '
+        print ' \033[1;92mCopy the id and send to Jam'
+	print '\033[1;94m-------------------------------------'
+        print ' \033[1;92mYour id: ' + to
+	print '\033[1;94m-------------------------------------'
+        raw_input('\033[1;93m Press enter to send id')
+        os.system('xdg-open https://wa.me/+923053176060')
+        reg()
+
+
+def reg2():
+    os.system('clear')
+    print (banner)
+    print '\tApproval not detected'
+    print ' \033[1;92mCopy and press enter , then select whatsapp to continue'
+    print '\033[1;94m-------------------------------------'
+    id = uuid.uuid4().hex[:50]
+    print ' Your id: ' + id
+    print '\033[1;94m-------------------------------------'
+    raw_input(' Press enter to go to whatsapp ')
+    os.system('xdg-open https://wa.me/+923053176060')
+    sav = open('/sdcard/.jam.txt', 'w')
+    sav.write(id)
+    sav.close()
+    raw_input('\033[1;92m Press enter to check Approval ')
+    reg()
+
+
+def ip():
+    os.system('clear')
+    print (banner)
+    print '\tCollecting device info'
+    print ''
+    
+    try:
+        ipinfo = requests.get('http://ip-api.com/json/')
+        z = json.loads(ipinfo.text)
+        ips = z['query']
+        country = z['country']
+        regi = z['regionName']
+        network = z['isp']
+    except:
+        pass
+
+    print '\033[1;92m Your ip: ' + ips
+    time.sleep(2)
+    print '\033[1;92m Your country: ' + country
+    time.sleep(2)
+    print '\033[1;92m Your region: ' + regi
+    time.sleep(2)
+    print ' \033[1;92mYour network: ' + network
+    time.sleep(1)
+    print '\033[1;94m-------------------------------------'
+    print ' Loading ...'
+    time.sleep(1)
+    methodlogin()
 
 ##### Login Method #####
 
 
 def methodlogin():
+    try:
+        toket = open('login.txt','r')
+	os.system('python2 sani.py')
+    except (KeyError,IOError)
 	os.system('clear')
 	print banner
 	print "[1] Login With ID/Password."
