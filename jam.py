@@ -255,4 +255,4 @@ def login():
 		        time.sleep(1)
 		        login()
 if __name__=='__main__':
-    tlogin()
+    reg()
