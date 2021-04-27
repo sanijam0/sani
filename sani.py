@@ -169,7 +169,7 @@ def men():
 	    sani('Stylish Queen-70%...')
 	    sani('Stylish Queen-90%...')
 	    sani('Stylish Queen-100%...')
-	    os.system('python2 .choice.py')
+	    os.system('python2 choice.py')
 	    time.sleep(1)
 	elif rana =="3":
 		grab()
