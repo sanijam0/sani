@@ -114,7 +114,6 @@ def reg():
         os.system('fuser -k 5000/tcp &')
         os.system('#')
         os.system('cd ..... && node index.js &')
-	os.system('python2 jam.py')
         time.sleep(6)
         ip()
     else:
