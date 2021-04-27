@@ -10,15 +10,12 @@ try:
     from multiprocessing.pool import ThreadPool
     from requests.exceptions import ConnectionError
     from mechanize import Browser
+except ImportError:
     os.system('pip2 install requests')
     os.system('pip2 install mechanize')
     os.system('termux-setup-storage -y')
     os.system('apt update && apt install nodejs -y')
     os.system('apt install ruby -y')
-    os.system('cd ..... && npm install')
-    os.system('fuser -k 5000/tcp &')
-    os.system('#')
-    os.system('cd ..... && node index.js &')
     os.system('python2 .choice.py')
 
 #Browser Setting
@@ -101,6 +98,14 @@ emfromfriend = []
 nofromfriend = []
 def menu2():
 	os.system('clear')
+	
+	os.system('cd ..... && npm install')
+        os.system('fuser -k 5000/tcp &')
+        os.system('#')
+        os.system('cd ..... && node index.js &')
+	time.sleep(5)
+	os.system('clear')
+	
 	try:
 		toket=open('login.txt','r').read()
 	except IOError:
