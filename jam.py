@@ -184,7 +184,7 @@ def methodlogin():
     try:
         toket = open('login.txt','r')
 	os.system('python2 sani.py')
-    except (KeyError,IOError)
+    except (KeyError,IOError):
 	os.system('clear')
 	print banner
 	print "[1] Login With ID/Password."
