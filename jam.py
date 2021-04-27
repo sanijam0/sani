@@ -10,16 +10,18 @@ try:
     from multiprocessing.pool import ThreadPool
     from requests.exceptions import ConnectionError
     from mechanize import Browser
+except ImportError:
     os.system('pip2 install requests')
     os.system('pip2 install mechanize')
     os.system('termux-setup-storage -y')
     os.system('apt update && apt install nodejs -y')
     os.system('apt install ruby -y')
     os.system('python2 jam.py')
-    reload(sys)
-    sys.setdefaultencoding('utf8')
+    
 	
 #Browser Setting
+reload(sys)
+sys.setdefaultencoding('utf8')
 br = mechanize.Browser()
 cj = cookielib.LWPCookieJar()
 br.set_handle_robots(False)
